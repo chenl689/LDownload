@@ -1,0 +1,131 @@
+{
+  "name": "ldownload-electron",
+  "productName": "LDownload",
+  "version": "3.4.1",
+  "private": true,
+  "type": "module",
+  "main": "out/main/index.cjs",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/build-thunder-helper.mjs && node scripts/build-browser-native-host.mjs && electron-vite dev",
+    "build": "node scripts/build-thunder-helper.mjs && node scripts/build-browser-native-host.mjs && electron scripts/icon-renderer && electron-vite build",
+    "preview": "electron-vite preview",
+    "typecheck": "tsc --noEmit",
+    "package:win": "node scripts/increment-build-version.mjs && node scripts/build-thunder-helper.mjs && node scripts/build-browser-native-host.mjs && electron scripts/icon-renderer && electron-vite build && node scripts/stage-thunder-sdk.mjs && electron-builder --win nsis",
+    "test": "node --experimental-strip-types --test tests/thunder-metadata.test.mjs tests/range-scheduler.test.mjs tests/concurrency-controller.test.mjs tests/http-engine.test.mjs tests/http-fixed-engine.test.mjs tests/ftp-engine.test.mjs tests/site-collector.test.mjs tests/link-parser.test.mjs tests/scheduling.test.mjs tests/ipc-validation.test.mjs tests/download-identity.test.mjs tests/app-icon.test.mjs tests/completion-state.test.mjs tests/progress-speed-estimator.test.mjs tests/throttled-publisher.test.mjs",
+    "benchmark:http": "node --experimental-strip-types scripts/benchmark-http-scheduler.mjs",
+    "smoke:thunder": "node --experimental-strip-types scripts/smoke-thunder-sdk.mjs",
+    "assets:icons": "electron scripts/icon-renderer"
+  },
+  "dependencies": {
+    "basic-ftp": "6.2.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "undici": "7.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "6.0.0",
+    "electron": "44.7.2",
+    "electron-builder": "26.17.0",
+    "electron-vite": "6.0.0-beta.7",
+    "typescript": "^5.9.3"
+  },
+  "build": {
+    "appId": "com.ldownload.desktop",
+    "productName": "LDownload",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "icon"
+    },
+    "files": [
+      "out/main/**/*",
+      "out/preload/**/*",
+      "out/renderer/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "icon/app-icon.svg",
+        "to": "icon/app-icon.svg"
+      },
+      {
+        "from": "icon/app-icon.png",
+        "to": "icon/app-icon.png"
+      },
+      {
+        "from": "icon/app-icon.ico",
+        "to": "icon/app-icon.ico"
+      },
+      {
+        "from": "icon/app-icon.icns",
+        "to": "icon/app-icon.icns"
+      },
+      {
+        "from": "vendor/thunder/ThunderBridge.exe",
+        "to": "thunder/ThunderBridge.exe"
+      },
+      {
+        "from": "vendor/thunder/sdk",
+        "to": "thunder/sdk"
+      },
+      {
+        "from": "vendor/browser-extension",
+        "to": "browser-extension"
+      },
+      {
+        "from": "out/browser-native-host/LDownloadNativeHost.exe",
+        "to": "browser-native-host/LDownloadNativeHost.exe"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "icon": "icon/app-icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "include": "installer.nsh",
+      "perMachine": true
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "category": "public.app-category.utilities",
+      "icon": "icon/app-icon.icns"
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "icon/app-icon.png"
+    },
+    "electronDist": "node_modules/electron/dist",
+    "fileAssociations": [
+      {
+        "ext": "torrent",
+        "name": "LDownloadTorrent",
+        "description": "BitTorrent 种子文件",
+        "icon": "app-icon.ico"
+      }
+    ]
+  }
+}

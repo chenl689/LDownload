@@ -1,0 +1,11 @@
+LDownload1/
+node_modules/
+out/
+dist/
+release/
+.pnpm-store/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+

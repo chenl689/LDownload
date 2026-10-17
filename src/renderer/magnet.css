@@ -1,0 +1,25 @@
+.field[hidden], .check[hidden], #ordinaryDownloadOptions[hidden], #torrentSource[hidden] { display: none !important; }
+.download-type-hint { color: var(--accent); }
+.torrent-source-name { display: flex; align-items: center; gap: 10px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface-2); }
+.torrent-source-name span { min-width: 0; flex: 1; overflow-wrap: anywhere; }
+.torrent-source-name button { flex: none; }
+.task-bt-details { color: var(--muted); }
+.magnet-settings-unavailable { color: var(--red); font-size: 12px; }
+.magnet-file-picker { overflow: hidden; margin-top: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.ordinary-file-picker .magnet-file-list { min-height: 210px; }
+.magnet-file-toolbar { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--line); background: var(--surface); color: var(--muted); font-size: 12px; }
+.magnet-file-toolbar .check { margin: 0; color: var(--ink); }
+.magnet-file-list { max-height: 220px; overflow: auto; padding: 6px; }
+.magnet-file-row { display: flex; align-items: center; gap: 9px; min-height: 34px; padding: 6px 8px; border-radius: 8px; cursor: default; }
+.magnet-file-row:hover { background: var(--surface-2); }
+.magnet-file-row input { flex: none; }
+.ordinary-file-row { cursor: pointer; }
+.ordinary-file-row.selected { background: var(--accent-soft); }
+.ordinary-file-icon { display: grid; flex: none; width: 24px; height: 24px; place-items: center; border-radius: 5px; color: var(--accent); background: var(--accent-soft); }
+.ordinary-file-icon svg { width: 15px; height: 15px; }
+.magnet-file-path { min-width: 0; flex: 1; overflow: hidden; color: var(--ink); text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.magnet-file-size { flex: none; color: var(--muted); font-size: 12px; }
+.magnet-file-empty { padding: 18px 10px; color: var(--muted); text-align: center; font-size: 13px; }
+.magnet-details-modal { width: min(760px, 100%); }
+.magnet-details-picker { margin-top: 0; }
+.magnet-details-picker .magnet-file-list { max-height: min(52vh, 480px); }
