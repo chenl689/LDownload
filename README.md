@@ -224,6 +224,10 @@ package:win 会在构建开始时修改 package.json 的版本号，即使后续
 
 当前正式交付目标是 Windows x64 NSIS。配置文件中保留了 macOS 和 Linux 的 electron-builder 目标描述，但项目脚本、Thunder 集成与当前打包流程尚未将它们作为已交付安装包。
 
+## 跨平台扩展说明
+
+LDownload 最初按跨平台方向设计，因此在下载引擎和平台能力层预留了统一接口，electron-builder 配置也包含 macOS 与 Linux 的打包目标。目前正式交付版本为 Windows x64。其他平台的开发者可以基于现有扩展点补充对应的系统适配与构建配置，生成适用于目标平台的软件包。macOS 和 Linux 目前尚未完成适配与发布，相关实现仍需在目标系统上构建和验证。
+
 ## 架构
 
 ~~~mermaid
